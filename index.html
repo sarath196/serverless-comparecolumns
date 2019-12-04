@@ -15,10 +15,8 @@
     <!-- Custom styles for this template -->
     <link href="static/assets/css/style.css" rel="stylesheet">
     <link href="static/assets/css/font-awesome.min.css" rel="stylesheet">
-
 	<link href="static/assets/css/jquery-linedtextarea.css" type="text/css" rel="stylesheet" />
 	<link href="static/assets/css/nav_tab.css" type="text/css" rel="stylesheet" />
-	<link href="static/assets/css/excel-bootstrap-table-filter-style.css" type="text/css" rel="stylesheet" />
 	<link href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css" type="text/css" rel="stylesheet" />
 	<link src="https://cdn.datatables.net/buttons/1.5.2/css/buttons.dataTables.min.css"/>
 
@@ -107,66 +105,30 @@
         <div class="tab-content">
 
         <div class="tab-pane fade in active" id="tab1default">
-            <div class="col-md-4">
-                <table id="id-union-diff1" class="table inputtable table-bordered table-intel">
+            <div class="col-md-12">
+                <table id="id-union-diff" class="table inputtable table-bordered table-intel">
                     <thead>
                       <tr>
                         <th class="filter">Field A</th>
+						<th class="filter">Field B</th>
+						<th class="filter">Result</th>
                       </tr>
                     </thead>
                     <tbody></tbody>
                 </table>
           </div>
-          <div class="col-md-4">
-              <table id="id-union-diff2" class="table inputtable table-bordered table-intel">
-                    <thead>
-                      <tr>
-                        <th class="filter">Field B</th>
-                      </tr>
-                    </thead>
-                    <tbody></tbody>
-              </table>
-          </div>
-         <div class="col-md-4">
-             <table id="id-union-result" class="table resulttable table-bordered table-intel">
-                    <thead>
-                      <tr>
-                        <th class="filter">Result</th>
-                      </tr>
-                    </thead>
-                    <tbody></tbody>
-              </table>
-          </div>
       </div>
 
 
-      <div class="tab-pane fade" id="tab2default">
-          <div class="col-md-4">
-             <table id="id-intersection-diff1" class="table inputtable table-bordered table-intel">
+      <div class="tab-pane fade in" id="tab2default">
+          <div class="col-md-12">
+             <table id="id-intersection-diff" class="table inputtable table-bordered table-intel">
                 <thead>
                   <tr>
                     <th class="filter">Field A</th>
+					<th class="filter">Field B</th>
+					<th class="filter">Result</th>
                   </tr>
-                </thead>
-                <tbody></tbody>
-              </table>
-          </div>
-          <div class="col-md-4">
-              <table id="id-intersection-diff2" class="table inputtable table-bordered table-intel">
-                <thead>
-                  <tr>
-                    <th class="filter">Field B</th>
-                  </tr>
-                </thead>
-                <tbody></tbody>
-              </table>
-          </div>
-         <div class="col-md-4">
-             <table id="id-intersection-result" class="table resulttable table-bordered table-intel">
-                <thead>
-                  <tr>
-                    <th class="filter">Result</th>
-                    </tr>
                 </thead>
                 <tbody></tbody>
               </table>
@@ -174,101 +136,47 @@
       </div>
 
 
-     <div class="tab-pane fade" id="tab3default">
-         <div class="col-md-4">
-              <table id="id-differnce_A_B-diff1" class="table inputtable table-bordered table-intel">
+     <div class="tab-pane fade in" id="tab3default">
+         <div class="col-md-12">
+              <table id="id-differnce_A_B-diff" class="table inputtable table-bordered table-intel">
                 <thead>
                   <tr>
                     <th class="filter">Field A</th>
+					<th class="filter">Field B</th>
+					<th class="filter">Result</th>
                   </tr>
                 </thead>
                 <tbody></tbody>
               </table>
          </div>
-         <div class="col-md-4">
-              <table id="id-differnce_A_B-diff2" class="table inputtable table-bordered table-intel">
-                <thead>
-                  <tr>
-                    <th class="filter">Field B</th>
-                  </tr>
-                </thead>
-                <tbody></tbody>
-              </table>
-         </div>
-         <div class="col-md-4">
-              <table id="id-differnce_A_B-result" class="table resulttable table-bordered table-intel">
-                <thead>
-                  <tr>
-                    <th class="filter">Result</th>
-                    </tr>
-                </thead>
-                <tbody></tbody>
-              </table>
-          </div>
       </div>
 
 
-     <div class="tab-pane fade" id="tab4default">
-         <div class="col-md-4">
-         <table id="id-difference_B_A-diff1" class="table inputtable table-bordered table-intel">
+     <div class="tab-pane fade in" id="tab4default">
+         <div class="col-md-12">
+         <table id="id-difference_B_A-diff" class="table inputtable table-bordered table-intel">
             <thead>
               <tr>
                 <th class="filter">Field A</th>
+				<th class="filter">Field B</th>
+				<th class="filter">Result</th>
               </tr>
             </thead>
             <tbody></tbody>
           </table>
           </div>
-          <div class="col-md-4">
-          <table id="id-difference_B_A-diff2" class="table inputtable table-bordered table-intel">
-            <thead>
-              <tr>
-                <th class="filter">Field B</th>
-              </tr>
-            </thead>
-            <tbody></tbody>
-          </table>
-          </div>
-         <div class="col-md-4">
-         <table id="id-difference_B_A-result" class="table resulttable table-bordered table-intel">
-            <thead>
-              <tr>
-                <th class="filter">Result</th>
-                </tr>
-            </thead>
-            <tbody></tbody>
-          </table>
-          </div>
-      </div>
+     </div>
 
 
-      <div class="tab-pane fade" id="tab5default">
-         <div class="col-md-4">
-         <table id="id-symmetric_difference-diff1" class="table inputtable table-bordered table-intel">
+      <div class="tab-pane fade in" id="tab5default">
+         <div class="col-md-12">
+         <table id="id-symmetric_difference-diff" class="table inputtable table-bordered table-intel">
             <thead>
               <tr>
                 <th class="filter">Field A</th>
+				<th class="filter">Field B</th>
+				<th class="filter">Result</th>
               </tr>
-            </thead>
-            <tbody></tbody>
-          </table>
-          </div>
-          <div class="col-md-4">
-          <table id="id-symmetric_difference-diff2" class="table inputtable table-bordered table-intel">
-            <thead>
-              <tr>
-                <th class="filter">Field B</th>
-              </tr>
-            </thead>
-            <tbody></tbody>
-          </table>
-          </div>
-          <div class="col-md-4">
-          <table id="id-symmetric_difference-result" class="table resulttable table-bordered table-intel">
-            <thead>
-              <tr>
-                <th class="filter">Result</th>
-                </tr>
             </thead>
             <tbody></tbody>
           </table>
@@ -295,7 +203,7 @@
     </div>
  </div>
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 <script src="static/assets/js/jquery-linedtextarea.js"></script>
 <script src="static/assets/js/excel-bootstrap-table-filter-bundle.js"></script>
@@ -311,7 +219,6 @@
 <script>
 $(function () {
 $(".lined_text").linedtextarea();
-loaDatatable();
 });
 </script>
 </body>

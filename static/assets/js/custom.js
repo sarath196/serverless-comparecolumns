@@ -1,66 +1,3 @@
-function recordSet(field1, field2, result, element){
-        $('#id-'+element+'-diff1').find('tbody').empty()
-        $.each(field1, function( index, value ) {
-          if ($.inArray(value, result) != -1){
-            $('#id-'+element+'-diff1').append('<tr><td class="TURQUOISE" >'+value+'</td></tr>')
-          }else{
-            $('#id-'+element+'-diff1').append('<tr><td>'+value+'</td></tr>')
-          }
-        });
-
-        $('#id-'+element+'-diff2').find('tbody').empty()
-        $.each(field2, function( index, value ) {
-          if ($.inArray(value, result) != -1){
-            $('#id-'+element+'-diff2').append('<tr><td class="TURQUOISE" >'+value+'</td></tr>')
-          }else{
-            $('#id-'+element+'-diff2').append('<tr><td>'+value+'</td></tr>')
-          }
-        });
-
-        $('#id-'+element+'-result').DataTable().clear();
-        $.each(result, function( index, value ) {
-          $('#id-'+element+'-result').dataTable().fnAddData( [value]);
-        });
-
-        $('.dropdown-filter-dropdown').empty();
-        excelFilter();
-}
-
-
-function excelFilter() {
-      // Apply the plugin
-      $('.inputtable').excelTableFilter();
-      $('.resulttable').excelTableFilter();
-}
-
-
-function loaDatatable(){
-        $('.resulttable').DataTable( {
-        	"paging":false,
-             "info":false,
-             "searching":false,
-            dom: 'Bfrtip',
-            buttons: [
-                {
-                    extend: "copy",
-                    title: "",
-                    className: "btn default cust_btn"
-                },
-                {
-                    extend: "csv",
-                    title: "",
-                    className: "btn default cust_btn"
-                },
-                {
-                    extend: "print",
-                    title: "",
-                    className: "btn default cust_btn"
-                }
-            ]
-        } );
-}
-
-
 $('#comparebtn').click(function(event){
         event.preventDefault();
         var serialized = $("form").serializeArray();
@@ -72,7 +9,7 @@ $('#comparebtn').click(function(event){
             alert("Invalid Input");
             return
         }
-        $.ajax({
+		$.ajax({
             url:"https://6aczceqqt6.execute-api.us-east-1.amazonaws.com/dev/compare",
             type: "POST",
             dataType: 'json',
@@ -92,26 +29,233 @@ $('#comparebtn').click(function(event){
 
 
 function OnSuccess(data){
+		
+		if (JSON.parse(data.statusCode) != 200){
+			alert(JSON.parse(data.body))
+			return false
+		}
+		
         request_response = JSON.parse(data.body);
-        field1 = request_response.field1
-        field2 = request_response.field2
-        diff_A_B = request_response.differnce_A_B_result
-        diff_B_A = request_response.difference_B_A_result
-        intersection_res = request_response.intersection_result
-        union_res = request_response.union_result
-        symmetric_diff = request_response.symmetric_difference_result
 
         $('#record-panel').show();
-        // render union records
-        recordSet(field1, field2, union_res, 'union');
-        // render intersection records
-        recordSet(field1, field2, intersection_res, 'intersection');
-        // render diff_A_B records
-        recordSet(field1, field2, diff_A_B, 'differnce_A_B');
-        // render diff_B_A records
-        recordSet(field1, field2, diff_B_A, 'difference_B_A');
-        // render symmetric records
-        recordSet(field1, field2, symmetric_diff, 'symmetric_difference');
+		
+		$('#id-union-diff').DataTable( {
+            data: request_response.union_result,
+			bPaginate: false,
+			destroy: true,
+			ordering: false,
+			createdRow: function( row, record, recordIndex){
+				if ($.inArray(record[0], request_response.union_result_set) != -1)
+					$(row).children().eq(0).addClass('TURQUOISE');
+				
+				if ($.inArray(record[1], request_response.union_result_set) != -1)
+					$(row).children().eq(1).addClass('TURQUOISE');
+            },
+			dom: 'Bfrtip',
+            buttons: [
+                {
+                    extend: "copy",
+                    title: "",
+                    className: "btn default cust_btn",
+					header: false,
+					exportOptions: {
+						columns: [2]
+					}
+                },
+                {
+                    extend: "csv",
+                    title: "",
+                    className: "btn default cust_btn",
+					exportOptions: {
+						columns: [0,1,2]
+					}
+                },
+                {
+                    extend: "print",
+                    title: "",
+                    className: "btn default cust_btn",
+					exportOptions: {
+						columns: [0,1,2]
+					}
+                }
+            ]
+            
+        } );
+		
+		$('#id-intersection-diff').DataTable( {
+            data: request_response.intersection_result,
+			bPaginate: false,
+			destroy: true,
+			ordering: false,
+			createdRow: function( row, record, recordIndex){
+				if ($.inArray(record[0], request_response.intersection_result_set) != -1)
+					$(row).children().eq(0).addClass('TURQUOISE');
+				
+				if ($.inArray(record[1], request_response.intersection_result_set) != -1)
+					$(row).children().eq(1).addClass('TURQUOISE');
+            },
+            dom: 'Bfrtip',
+            buttons: [
+                {
+                    extend: "copy",
+                    title: "",
+                    className: "btn default cust_btn",
+					header: false,
+					exportOptions: {
+						columns: [2]
+					}
+                },
+                {
+                    extend: "csv",
+                    title: "",
+                    className: "btn default cust_btn",
+					exportOptions: {
+						columns: [0,1,2]
+					}
+                },
+                {
+                    extend: "print",
+                    title: "",
+                    className: "btn default cust_btn",
+					exportOptions: {
+						columns: [0,1,2]
+					}
+                }
+            ]
+            
+        } );
+		
+		
+		$('#id-differnce_A_B-diff').DataTable( {
+            data: request_response.differnce_A_B_result,
+			bPaginate: false,
+			destroy: true,
+			ordering: false,
+			createdRow: function( row, record, recordIndex){
+				if ($.inArray(record[0], request_response.differnce_A_B_result_set) != -1)
+					$(row).children().eq(0).addClass('TURQUOISE');
+				
+				if ($.inArray(record[1], request_response.differnce_A_B_result_set) != -1)
+					$(row).children().eq(1).addClass('TURQUOISE');
+            },
+            dom: 'Bfrtip',
+            buttons: [
+                {
+                    extend: "copy",
+                    title: "",
+                    className: "btn default cust_btn",
+					header: false,
+					exportOptions: {
+						columns: [2]
+					}
+                },
+                {
+                    extend: "csv",
+                    title: "",
+                    className: "btn default cust_btn",
+					exportOptions: {
+						columns: [0,1,2]
+					}
+                },
+                {
+                    extend: "print",
+                    title: "",
+                    className: "btn default cust_btn",
+					exportOptions: {
+						columns: [0,1,2]
+					}
+                }
+            ]
+            
+        } );
+		
+		
+		$('#id-difference_B_A-diff').DataTable( {
+            data: request_response.difference_B_A_result,
+			bPaginate: false,
+			destroy: true,
+			ordering: false,
+			createdRow: function( row, record, recordIndex){
+				if ($.inArray(record[0], request_response.difference_B_A_result_set) != -1)
+					$(row).children().eq(0).addClass('TURQUOISE');
+				
+				if ($.inArray(record[1], request_response.difference_B_A_result_set) != -1)
+					$(row).children().eq(1).addClass('TURQUOISE');
+            },
+            dom: 'Bfrtip',
+            buttons: [
+                {
+                    extend: "copy",
+                    title: "",
+                    className: "btn default cust_btn",
+					header: false,
+					exportOptions: {
+						columns: [2]
+					}
+                },
+                {
+                    extend: "csv",
+                    title: "",
+                    className: "btn default cust_btn",
+					exportOptions: {
+						columns: [0,1,2]
+					}
+                },
+                {
+                    extend: "print",
+                    title: "",
+                    className: "btn default cust_btn",
+					exportOptions: {
+						columns: [0,1,2]
+					}
+                }
+            ]
+            
+        } );
+		
+		
+		$('#id-symmetric_difference-diff').DataTable( {
+            data: request_response.Symmetric_difference_result,
+			bPaginate: false,
+			destroy: true,
+			ordering: false,
+			createdRow: function( row, record, recordIndex){
+				if ($.inArray(record[0], request_response.Symmetric_difference_result_set) != -1)
+					$(row).children().eq(0).addClass('TURQUOISE');
+				
+				if ($.inArray(record[1], request_response.Symmetric_difference_result_set) != -1)
+					$(row).children().eq(1).addClass('TURQUOISE');
+            },
+            dom: 'Bfrtip',
+            buttons: [
+                {
+                    extend: "copy",
+                    title: "",
+                    className: "btn default cust_btn",
+					header: false,
+					exportOptions: {
+						columns: [2]
+					}
+                },
+                {
+                    extend: "csv",
+                    title: "",
+                    className: "btn default cust_btn",
+					exportOptions: {
+						columns: [0,1,2]
+					}
+                },
+                {
+                    extend: "print",
+                    title: "",
+                    className: "btn default cust_btn",
+					exportOptions: {
+						columns: [0,1,2]
+					}
+                }
+            ]
+            
+        } );
 }
 
 $('.copy-record').on('click', function(event){
