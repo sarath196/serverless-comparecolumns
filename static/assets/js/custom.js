@@ -47,7 +47,7 @@ function OnSuccess(data){
 		}
 		
         request_response = JSON.parse(data.body);
-        console.log(request_response);
+        
         $('#record-panel').show();
         
         $('.field-f1-badge').text($('#field1').val().split('\n').length);
