@@ -24,7 +24,7 @@
 	textarea {
 
 		width: 100%;
-		//outline: none;
+		/*outline: none;*/
 	}
 	.cust_btn{
 		height: 20px;
@@ -34,14 +34,21 @@
 	}
 	.TURQUOISE{
 	background-color:TURQUOISE;
-	}
+  }
+  .navbar{
+    border-radius: 0;
+  }
 	#wait {
       background: url("https://www.aveva.com/Images/ajax-loader.gif") no-repeat scroll center center rgba(255, 255, 255, 0.5);
       position: absolute;
       height: 100%;
       width: 100%;
+      z-index: 2000;
       display: none;
     }
+  .badge-header{
+    float: right;
+  }
 	</style>
 
   </head>
@@ -50,7 +57,7 @@
     <!-- Spinner Block -->
     <div id="wait"></div>
 	<!-- Fixed navbar -->
-    <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="navbar navbar-default " role="navigation">
       <div class="container">
         <div class="navbar-header">
           <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -99,6 +106,10 @@
                             <li><a href="#tab3default" data-toggle="tab">Field A not in Field B</a></li>
                             <li><a href="#tab4default" data-toggle="tab">Field B not in Field A</a></li>
                             <li><a href="#tab5default" data-toggle="tab">Symmetric Field A & Field B</a></li>
+                            <div style="float: right; padding-top: 10px; padding-right: 10px;">
+                              <span>Text Box 1 Count&nbsp; <span class="badge badge-pill badge-info field-f1-badge">0</span></span>
+                              &nbsp;&nbsp;|&nbsp;&nbsp;<span>Text Box 2 Count&nbsp; <span class="badge badge-pill badge-info field-f2-badge">0</span></span>
+                            </div>
                         </ul>
                 </div>
         <div class="panel-body">
@@ -109,9 +120,9 @@
                 <table id="id-union-diff" class="table inputtable table-bordered table-intel">
                     <thead>
                       <tr>
-                        <th class="filter">Field A</th>
-						<th class="filter">Field B</th>
-						<th class="filter">Result</th>
+                        <th class="filter">Field A <div class="badge-header">Count &nbsp; <span class="badge badge-pill badge-info union-f1-badge">0</span></div></th>
+						            <th class="filter">Field B <div class="badge-header">Count &nbsp; <span class="badge badge-pill badge-info badge-header union-f2-badge">0</span></div></th>
+						            <th class="filter">Result <div class="badge-header">Count &nbsp; <span class="badge badge-pill badge-info badge-header union-result-badge">0</span></div></th>
                       </tr>
                     </thead>
                     <tbody></tbody>
@@ -125,9 +136,9 @@
              <table id="id-intersection-diff" class="table inputtable table-bordered table-intel">
                 <thead>
                   <tr>
-                    <th class="filter">Field A</th>
-					<th class="filter">Field B</th>
-					<th class="filter">Result</th>
+                    <th class="filter">Field A <div class="badge-header">Count &nbsp; <span class="badge badge-pill badge-info intersection-f1-badge">0</span></div></th>
+					          <th class="filter">Field B <div class="badge-header">Count &nbsp; <span class="badge badge-pill badge-info intersection-f2-badge">0</span></div></th>
+					          <th class="filter">Result <div class="badge-header">Count &nbsp; <span class="badge badge-pill badge-info intersection-result-badge">0</span></div></th>
                   </tr>
                 </thead>
                 <tbody></tbody>
@@ -141,9 +152,9 @@
               <table id="id-differnce_A_B-diff" class="table inputtable table-bordered table-intel">
                 <thead>
                   <tr>
-                    <th class="filter">Field A</th>
-					<th class="filter">Field B</th>
-					<th class="filter">Result</th>
+                    <th class="filter">Field A <div class="badge-header">Count &nbsp; <span class="badge badge-pill badge-info differnce_A_B-f1-badge">0</span></div></th>
+					          <th class="filter">Field B <div class="badge-header">Count &nbsp; <span class="badge badge-pill badge-info differnce_A_B-f2-badge">0</span></div></th>
+					          <th class="filter">Result <div class="badge-header">Count &nbsp; <span class="badge badge-pill badge-info differnce_A_B-result-badge">0</span></div></th>
                   </tr>
                 </thead>
                 <tbody></tbody>
@@ -157,9 +168,9 @@
          <table id="id-difference_B_A-diff" class="table inputtable table-bordered table-intel">
             <thead>
               <tr>
-                <th class="filter">Field A</th>
-				<th class="filter">Field B</th>
-				<th class="filter">Result</th>
+                <th class="filter">Field A <div class="badge-header">Count &nbsp; <span class="badge badge-pill badge-info difference_B_A-f1-badge">0</span></div></th>
+				        <th class="filter">Field B <div class="badge-header">Count &nbsp; <span class="badge badge-pill badge-info difference_B_A-f2-badge">0</span></div></th>
+				        <th class="filter">Result <div class="badge-header">Count &nbsp; <span class="badge badge-pill badge-info difference_B_A-result-badge">0</span></div></th>
               </tr>
             </thead>
             <tbody></tbody>
@@ -173,9 +184,9 @@
          <table id="id-symmetric_difference-diff" class="table inputtable table-bordered table-intel">
             <thead>
               <tr>
-                <th class="filter">Field A</th>
-				<th class="filter">Field B</th>
-				<th class="filter">Result</th>
+                <th class="filter">Field A <div class="badge-header">Count &nbsp; <span class="badge badge-pill badge-info symmetric_difference-f1-badge">0</span></div></th>
+				        <th class="filter">Field B <div class="badge-header">Count &nbsp; <span class="badge badge-pill badge-info symmetric_difference-f2-badge">0</span></div></th>
+				        <th class="filter">Result <div class="badge-header">Count &nbsp; <span class="badge badge-pill badge-info symmetric_difference-result-badge">0</span></div></th>
               </tr>
             </thead>
             <tbody></tbody>

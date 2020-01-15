@@ -29,27 +29,46 @@ $('#comparebtn').click(function(event){
 
 
 function OnSuccess(data){
-		
+
+        var union_f1_count = 0;
+        var union_f2_count = 0;
+        var intersection_f1_count = 0;
+        var intersection_f2_count = 0;
+        var differnce_A_B_f1_count = 0;
+        var differnce_A_B_f2_count = 0;
+        var difference_B_A_f1_count = 0;
+        var difference_B_A_f2_count = 0;
+        var symmetric_difference_f1_count = 0;
+        var symmetric_difference_f2_count = 0;
+
 		if (JSON.parse(data.statusCode) != 200){
 			alert(JSON.parse(data.body))
 			return false
 		}
 		
         request_response = JSON.parse(data.body);
-
+        console.log(request_response);
         $('#record-panel').show();
-		
+        
+        $('.field-f1-badge').text($('#field1').val().split('\n').length);
+        $('.field-f2-badge').text($('#field2').val().split('\n').length);
+
 		$('#id-union-diff').DataTable( {
             data: request_response.union_result,
 			bPaginate: false,
 			destroy: true,
 			ordering: false,
 			createdRow: function( row, record, recordIndex){
-				if ($.inArray(record[0], request_response.union_result_set) != -1)
-					$(row).children().eq(0).addClass('TURQUOISE');
+				if ($.inArray(record[0], request_response.union_result_set) != -1){
+                    union_f1_count +=1;
+                    $(row).children().eq(0).addClass('TURQUOISE');
+                }
+					
 				
-				if ($.inArray(record[1], request_response.union_result_set) != -1)
-					$(row).children().eq(1).addClass('TURQUOISE');
+				if ($.inArray(record[1], request_response.union_result_set) != -1){
+                    union_f2_count+=1
+                    $(row).children().eq(1).addClass('TURQUOISE');
+                }
             },
 			dom: 'Bfrtip',
             buttons: [
@@ -81,18 +100,25 @@ function OnSuccess(data){
             ]
             
         } );
-		
-		$('#id-intersection-diff').DataTable( {
+        $('.union-f1-badge').text(union_f1_count);
+        $('.union-f2-badge').text(union_f2_count);
+		$('.union-result-badge').text(request_response.union_result_set.length);
+        
+        $('#id-intersection-diff').DataTable( {
             data: request_response.intersection_result,
 			bPaginate: false,
 			destroy: true,
 			ordering: false,
 			createdRow: function( row, record, recordIndex){
-				if ($.inArray(record[0], request_response.intersection_result_set) != -1)
+                if ($.inArray(record[0], request_response.intersection_result_set) != -1){
+                    intersection_f1_count+=1;
 					$(row).children().eq(0).addClass('TURQUOISE');
-				
-				if ($.inArray(record[1], request_response.intersection_result_set) != -1)
-					$(row).children().eq(1).addClass('TURQUOISE');
+                }
+                
+				if ($.inArray(record[1], request_response.intersection_result_set) != -1){
+                    intersection_f2_count+=1;
+                    $(row).children().eq(1).addClass('TURQUOISE');
+                }
             },
             dom: 'Bfrtip',
             buttons: [
@@ -124,6 +150,9 @@ function OnSuccess(data){
             ]
             
         } );
+        $('.intersection-f1-badge').text(intersection_f1_count);
+        $('.intersection-f2-badge').text(intersection_f2_count);
+		$('.intersection-result-badge').text(request_response.intersection_result_set.length);
 		
 		
 		$('#id-differnce_A_B-diff').DataTable( {
@@ -132,11 +161,16 @@ function OnSuccess(data){
 			destroy: true,
 			ordering: false,
 			createdRow: function( row, record, recordIndex){
-				if ($.inArray(record[0], request_response.differnce_A_B_result_set) != -1)
-					$(row).children().eq(0).addClass('TURQUOISE');
-				
-				if ($.inArray(record[1], request_response.differnce_A_B_result_set) != -1)
-					$(row).children().eq(1).addClass('TURQUOISE');
+                if ($.inArray(record[0], request_response.differnce_A_B_result_set) != -1)
+                {
+                    differnce_A_B_f1_count+=1;
+                    $(row).children().eq(0).addClass('TURQUOISE');
+                }
+
+				if ($.inArray(record[1], request_response.differnce_A_B_result_set) != -1){
+                    differnce_A_B_f2_count+=1;
+                    $(row).children().eq(1).addClass('TURQUOISE');
+                }
             },
             dom: 'Bfrtip',
             buttons: [
@@ -168,6 +202,9 @@ function OnSuccess(data){
             ]
             
         } );
+        $('.differnce_A_B-f1-badge').text(differnce_A_B_f1_count);
+        $('.differnce_A_B-f2-badge').text(differnce_A_B_f2_count);
+		$('.differnce_A_B-result-badge').text(request_response.differnce_A_B_result_set.length);
 		
 		
 		$('#id-difference_B_A-diff').DataTable( {
@@ -176,11 +213,15 @@ function OnSuccess(data){
 			destroy: true,
 			ordering: false,
 			createdRow: function( row, record, recordIndex){
-				if ($.inArray(record[0], request_response.difference_B_A_result_set) != -1)
-					$(row).children().eq(0).addClass('TURQUOISE');
-				
-				if ($.inArray(record[1], request_response.difference_B_A_result_set) != -1)
-					$(row).children().eq(1).addClass('TURQUOISE');
+				if ($.inArray(record[0], request_response.difference_B_A_result_set) != -1){
+                    difference_B_A_f1_count+=1;
+                    $(row).children().eq(0).addClass('TURQUOISE');
+                }
+					
+				if ($.inArray(record[1], request_response.difference_B_A_result_set) != -1){
+                    difference_B_A_f2_count+=1;
+                    $(row).children().eq(1).addClass('TURQUOISE');
+                }
             },
             dom: 'Bfrtip',
             buttons: [
@@ -212,6 +253,9 @@ function OnSuccess(data){
             ]
             
         } );
+        $('.difference_B_A-f1-badge').text(difference_B_A_f1_count);
+        $('.difference_B_A-f2-badge').text(difference_B_A_f2_count);
+		$('.difference_B_A-result-badge').text(request_response.difference_B_A_result_set.length);
 		
 		
 		$('#id-symmetric_difference-diff').DataTable( {
@@ -220,11 +264,15 @@ function OnSuccess(data){
 			destroy: true,
 			ordering: false,
 			createdRow: function( row, record, recordIndex){
-				if ($.inArray(record[0], request_response.Symmetric_difference_result_set) != -1)
-					$(row).children().eq(0).addClass('TURQUOISE');
-				
-				if ($.inArray(record[1], request_response.Symmetric_difference_result_set) != -1)
-					$(row).children().eq(1).addClass('TURQUOISE');
+				if ($.inArray(record[0], request_response.Symmetric_difference_result_set) != -1){
+                    symmetric_difference_f1_count+=1;
+                    $(row).children().eq(0).addClass('TURQUOISE');
+                }
+
+				if ($.inArray(record[1], request_response.Symmetric_difference_result_set) != -1){
+                    symmetric_difference_f2_count+=1;
+                    $(row).children().eq(1).addClass('TURQUOISE');
+                }
             },
             dom: 'Bfrtip',
             buttons: [
@@ -256,6 +304,9 @@ function OnSuccess(data){
             ]
             
         } );
+        $('.symmetric_difference-f1-badge').text(symmetric_difference_f1_count);
+        $('.symmetric_difference-f2-badge').text(symmetric_difference_f2_count);
+		$('.symmetric_difference-result-badge').text(request_response.Symmetric_difference_result_set.length);
 }
 
 $('.copy-record').on('click', function(event){
